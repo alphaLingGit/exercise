@@ -8,7 +8,7 @@ public class PrototypeManager {
     /**
      * 用来记录原型的编号和原型实例的对应关系
      */
-    private static final Map<String,Prototype> map = new HashMap<>();
+    private static final Map<String,Prototype> MAP = new HashMap<>();
 
     /**
      * 私有化构造方法，避免外部创建实例
@@ -21,7 +21,7 @@ public class PrototypeManager {
      * @param prototype    原型实例
      */
     public synchronized static void setPrototype(String prototypeId , Prototype prototype){
-        map.put(prototypeId, prototype);
+        MAP.put(prototypeId, prototype);
     }
 
     /**
@@ -29,7 +29,7 @@ public class PrototypeManager {
      * @param prototypeId 原型编号
      */
     public synchronized static void removePrototype(String prototypeId){
-        map.remove(prototypeId);
+        MAP.remove(prototypeId);
     }
 
     /**
@@ -39,7 +39,7 @@ public class PrototypeManager {
      * @throws Exception    如果原型编号对应的实例不存在，则抛出异常
      */
     public synchronized static Prototype getPrototype(String prototypeId) throws Exception{
-        Prototype prototype = map.get(prototypeId);
+        Prototype prototype = MAP.get(prototypeId);
         if(prototype == null){
             throw new Exception("您希望获取的原型还没有注册或已被销毁");
         }

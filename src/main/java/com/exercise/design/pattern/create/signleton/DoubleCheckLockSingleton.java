@@ -17,7 +17,45 @@ public class DoubleCheckLockSingleton {
 
     private volatile static DoubleCheckLockSingleton INSTANCE;
 
+    @Override
+    public String toString() {
+        return "DoubleCheckLockSingleton{" +
+                "one='" + one + '\'' +
+                ", two='" + two + '\'' +
+                ", three='" + three + '\'' +
+                ", four='" + four + '\'' +
+                '}';
+    }
+
+    /**
+     * 一
+     */
+    private String one;
+    /**
+     * 二
+     */
+    private String two;
+    /**
+     * 三
+     */
+    private String three;
+    /**
+     * 四
+     */
+    private String four;
+
+
     private DoubleCheckLockSingleton() {
+        /*try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("初始化");
+        this.one = "三万里河东入海";
+        this.two = "五千仞岳上摩天";
+        this.three = "遗民泪尽胡尘里";
+        this.four = "南望王师又一年";*/
     }
 
     public static DoubleCheckLockSingleton getInstance() {
@@ -25,10 +63,51 @@ public class DoubleCheckLockSingleton {
             synchronized (DoubleCheckLockSingleton.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new DoubleCheckLockSingleton();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    INSTANCE.setOne("三万里河东入海");
+                    INSTANCE.setTwo("五千仞岳上摩天");
+                    INSTANCE.setThree("遗民泪尽胡尘里");
+                    INSTANCE.setFour("南望王师又一年");
                 }
             }
         }
         return INSTANCE;
+    }
+
+    public String getOne() {
+        return one;
+    }
+
+    public void setOne(String one) {
+        this.one = one;
+    }
+
+    public String getTwo() {
+        return two;
+    }
+
+    public void setTwo(String two) {
+        this.two = two;
+    }
+
+    public String getThree() {
+        return three;
+    }
+
+    public void setThree(String three) {
+        this.three = three;
+    }
+
+    public String getFour() {
+        return four;
+    }
+
+    public void setFour(String four) {
+        this.four = four;
     }
 
 }

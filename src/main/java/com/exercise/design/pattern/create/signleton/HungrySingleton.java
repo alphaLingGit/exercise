@@ -5,7 +5,9 @@ package com.exercise.design.pattern.create.signleton;
  */
 public class HungrySingleton {
 
-    private static HungrySingleton INSTANCE = new HungrySingleton();
+    private static final HungrySingleton INSTANCE = new HungrySingleton();
+
+    private String str;
 
     private HungrySingleton() {
     }
