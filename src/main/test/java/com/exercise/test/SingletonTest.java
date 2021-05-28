@@ -3,19 +3,23 @@ package com.exercise.test;
 import com.exercise.design.pattern.create.signleton.*;
 import org.junit.Test;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
 public class SingletonTest {
 
     public static void main(String[] args) throws InterruptedException {
-        TestThread thread1 = new TestThread();
-        TestThread thread2 = new TestThread();
-        TestThread thread3 = new TestThread();
-        TestThread thread4 = new TestThread();
-        TestThread thread5 = new TestThread();
-        TestThread thread6 = new TestThread();
-        TestThread thread7 = new TestThread();
-        TestThread thread8 = new TestThread();
-        TestThread thread9 = new TestThread();
-        TestThread thread0 = new TestThread();
+        Runnable runnable = () -> System.out.println(DoubleCheckLockSingleton.getInstance());
+        Thread thread1 = new Thread(runnable);
+        Thread thread2 = new Thread(runnable);
+        Thread thread3 = new Thread(runnable);
+        Thread thread4 = new Thread(runnable);
+        Thread thread5 = new Thread(runnable);
+        Thread thread6 = new Thread(runnable);
+        Thread thread7 = new Thread(runnable);
+        Thread thread8 = new Thread(runnable);
+        Thread thread9 = new Thread(runnable);
+        Thread thread0 = new Thread(runnable);
         thread1.start();
         thread2.start();
         thread3.start();
@@ -30,15 +34,18 @@ public class SingletonTest {
         thread0.start();
     }
 
-    static class TestThread extends Thread {
-        @Override
-        public void run() {
-            System.out.println(DoubleCheckLockSingleton.getInstance());
-        }
-    }
-
     @Test
     public void test() {
-
+        File file = new File("D:/test.txt");
+        int times = 0;
+        while(!file.exists() && times < 600){
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(times);
+                times++;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

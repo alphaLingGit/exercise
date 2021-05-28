@@ -63,15 +63,6 @@ public class DoubleCheckLockSingleton {
             synchronized (DoubleCheckLockSingleton.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new DoubleCheckLockSingleton();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    INSTANCE.setOne("三万里河东入海");
-                    INSTANCE.setTwo("五千仞岳上摩天");
-                    INSTANCE.setThree("遗民泪尽胡尘里");
-                    INSTANCE.setFour("南望王师又一年");
                 }
             }
         }
