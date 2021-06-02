@@ -13,11 +13,17 @@ import com.exercise.design.pattern.mix.factoryStrategy.Card;
 import com.exercise.design.pattern.mix.factoryStrategy.DeductionFacade;
 import com.exercise.design.pattern.mix.factoryStrategy.Trade;
 import com.exercise.design.pattern.mix.observerMediator.*;
+import com.exercise.design.pattern.mix.strategyComposite.User;
+import com.exercise.design.pattern.mix.strategyComposite.UserByAgeThan;
+import com.exercise.design.pattern.mix.strategyComposite.UserByNameLike;
+import com.exercise.design.pattern.mix.strategyComposite.UserProvider;
 import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BehaviorTest {
 
@@ -98,4 +104,33 @@ public class BehaviorTest {
         // FIXME: 2021/6/1 未获取到预期结果。。。
     }
 
+    @Test
+    public void strategyCompositeTest() {
+        List<User> userList = new ArrayList<>();
+        userList.add(new User("张三", 23));
+        userList.add(new User("李四", 61));
+        userList.add(new User("王五", 65));
+        userList.add(new User("张丽", 35));
+        userList.add(new User("李鹏", 72));
+        userList.add(new User("王艳", 18));
+        userList.add(new User("王小二", 14));
+        userList.add(new User("李张", 32));
+        UserProvider provider = new UserProvider(userList);
+        System.out.println("姓张");
+        for (User user : provider.findUser(new UserByNameLike("张%"))) {
+            System.out.println(user);
+        }
+        System.out.println("年龄大于60");
+        for (User user : provider.findUser(new UserByAgeThan(60))) {
+            System.out.println(user);
+        }
+        System.out.println("年龄大于30的张姓");
+        for (User user : provider.findUser(new UserByNameLike("%张%").and(new UserByAgeThan(30)))) {
+            System.out.println(user);
+        }
+        System.out.println("年龄小于20");
+        for (User user : provider.findUser(new UserByAgeThan(20).not())) {
+            System.out.println(user);
+        }
+    }
 }
