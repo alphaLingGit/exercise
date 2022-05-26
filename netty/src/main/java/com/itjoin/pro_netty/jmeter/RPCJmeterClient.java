@@ -60,10 +60,8 @@ public class RPCJmeterClient extends AbstractJavaSamplerClient{
 		 synchronized (hasInit){
 			 if(!hasInit.getAndSet(true)){
 				 System.out.println("启动容器初始化===");
-				 AnnotationConfigApplicationContext springContext = new
-						 AnnotationConfigApplicationContext(
-						 new String[]{"com.itjoin.pro_netty.controller",
-								 "com.itjoin.pro_netty.proxy"});
+				 AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext(
+						 "com.itjoin.pro_netty.controller", "com.itjoin.pro_netty.proxy");
 				 loginController= springContext.
 						 getBean(LoginController.class);
 				 //socket连接初始化

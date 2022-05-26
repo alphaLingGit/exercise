@@ -1,8 +1,11 @@
 package com.itjoin.pro_netty.spring;
+
 import org.springframework.context.annotation.
         AnnotationConfigApplicationContext;
+
 public class ApplicationMain {
     private static volatile boolean running = true;
+
     public static void main(String[] args) {
         try {
             //此处扫描包名，不能包含代理类的包名
@@ -10,8 +13,8 @@ public class ApplicationMain {
             AnnotationConfigApplicationContext context =
                     new AnnotationConfigApplicationContext(
                             "com.itjoin.pro_netty.controller",
-                            "com.itjoin.pro_netty.spring"
-                    ,"com.itjoin.pro_netty.service");
+                            "com.itjoin.pro_netty.spring",
+                            "com.itjoin.pro_netty.service");
             //在jvm中增加一个关闭的钩子,当jvm关闭的时候，
             // 会执行系统中已经设置的所有通过方法addShutdownHook
             // 添加的钩子，当系统执行完这些钩子后，jvm才会关闭。

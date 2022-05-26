@@ -13,9 +13,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+
 //@Component
 public class JdkProxy implements InvocationHandler, BeanPostProcessor {
     private Field target;
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //采用netty客户端去需要去调用服务器

@@ -1,9 +1,11 @@
 package com.itjoin.pro_netty.annotation;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 //此注解用于远程调用的接口属性上
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

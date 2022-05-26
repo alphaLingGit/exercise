@@ -1,4 +1,5 @@
 package com.itjoin.pro_netty.zookeeper;
+
 import com.itjoin.pro_netty.constant.Constants;
 import com.itjoin.pro_netty.server.NettyServer;
 import org.apache.curator.framework.CuratorFramework;
@@ -7,6 +8,7 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
+
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,11 +38,11 @@ public class ServerWatcher implements CuratorWatcher {
      */
     @Override
     public void process(WatchedEvent event) throws Exception {
-        System.out.println("========服务器监听zk=event==="+event.getState()+"==="
-                +new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        System.out.println("========服务器监听zk=event===" + event.getState() + "==="
+                + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         //当会话丢失
         if (event.getState().equals(Watcher.Event.KeeperState.Disconnected)
-                ||event.getState().equals(Watcher.Event.KeeperState.Expired)) {
+                || event.getState().equals(Watcher.Event.KeeperState.Expired)) {
             try {
                 try {
                     //先尝试去关闭旧的连接
@@ -63,7 +65,7 @@ public class ServerWatcher implements CuratorWatcher {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             //其他事件发生时，只需要设置监听即可
             CuratorFramework client = ZookeeperFactory.create();
             client.getChildren().usingWatcher(this).forPath(NettyServer.SERVER_PATH);

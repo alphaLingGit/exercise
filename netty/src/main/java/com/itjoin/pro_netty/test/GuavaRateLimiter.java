@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GuavaRateLimiter {
 
-    public static ConcurrentHashMap<String, RateLimiter> resourceRateLimiter = new ConcurrentHashMap<String, RateLimiter>();
+    public static ConcurrentHashMap<String, RateLimiter> resourceRateLimiter = new ConcurrentHashMap<>();
 
     //初始化限流工具RateLimiter
     static {
@@ -28,15 +28,12 @@ public class GuavaRateLimiter {
 
     public static void main(String[] args) {
         for (int i = 0; i < 5000; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //如果获得令牌指令，则执行业务逻辑
-                    if (resourceRateLimiter.get("order").tryAcquire(10, TimeUnit.MICROSECONDS)) {
-                        System.out.println("执行业务逻辑");
-                    } else {
-                        System.out.println("限流");
-                    }
+            new Thread(() -> {
+                //如果获得令牌指令，则执行业务逻辑
+                if (resourceRateLimiter.get("order").tryAcquire(10, TimeUnit.MICROSECONDS)) {
+                    System.out.println("执行业务逻辑");
+                } else {
+                    System.out.println("限流");
                 }
             }).start();
         }
