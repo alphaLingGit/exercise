@@ -21,9 +21,8 @@ public class InitLoadRemoteMethod implements ApplicationListener<ContextRefreshe
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         //从Spring容器中获取标有Remote注解的对象
-        Map<String, Object> controllerBeans =
-                contextRefreshedEvent.getApplicationContext()
-                        .getBeansWithAnnotation(Remote.class);
+        Map<String, Object> controllerBeans = contextRefreshedEvent.getApplicationContext()
+                .getBeansWithAnnotation(Remote.class);
         //遍历所有的Controller
         for (String key : controllerBeans.keySet()) {
             Object bean = controllerBeans.get(key);
@@ -34,8 +33,7 @@ public class InitLoadRemoteMethod implements ApplicationListener<ContextRefreshe
                         getInterfaces()[0].getName()
                         + "." + method.getName();
                 //把方法和bean放入包装类MethodBean中
-                Mediator.MethodBean methodBean =
-                        new Mediator.MethodBean();
+                Mediator.MethodBean methodBean = new Mediator.MethodBean();
                 methodBean.setBean(bean);
                 methodBean.setMethod(method);
                 //最终把类名+方法名作为Key，方法+

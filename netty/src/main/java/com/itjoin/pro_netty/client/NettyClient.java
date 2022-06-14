@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.itjoin.pro_netty.asyn.RequestFuture;
 
 import com.itjoin.pro_netty.asyn.Response;
+import com.itjoin.pro_netty.constant.Constants;
 import com.itjoin.pro_netty.controller.UserController;
 import com.itjoin.pro_netty.controller.UserControllerI;
 import io.netty.bootstrap.Bootstrap;
@@ -106,7 +107,7 @@ public class NettyClient {
         try {
             String requestStr = JSONObject.toJSONString(request);
 //			ChannelFuture future = ChannelFutureManager.get();
-            ChannelFuture future = getBootstrap().connect("127.0.0.1", 8991).sync();
+            ChannelFuture future = getBootstrap().connect("127.0.0.1", Constants.PORT).sync();
             future.channel().writeAndFlush(requestStr);
             //同步等待响应结果，当promise有值了才会继续往下执行
             Object result = request.get();

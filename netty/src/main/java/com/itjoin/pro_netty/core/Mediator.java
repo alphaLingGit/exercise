@@ -47,15 +47,12 @@ public class Mediator {
                 //假如参数是List类型
                 if (paramType.isAssignableFrom(List.class)) {
                     //采用JSONArray反序列化
-                    param = JSONArray.
-                            parseArray(JSONArray.toJSONString(body), paramType);
-                } else if (paramType.getName().
-                        equals(String.class.getName())) {//假如是String类型
+                    param = JSONArray.parseArray(JSONArray.toJSONString(body), paramType);
+                } else if (paramType.getName().equals(String.class.getName())) {//假如是String类型
                     param = body;
                 } else {
                     //采用JSONObject反序列化
-                    param = JSONObject.
-                            parseObject(JSONObject.toJSONString(body), paramType);
+                    param = JSONObject.parseObject(JSONObject.toJSONString(body), paramType);
                 }
                 //采用JAVA反射，运行业务逻辑处理方法，并获取返回结果
                 Object result = method.invoke(bean, param);

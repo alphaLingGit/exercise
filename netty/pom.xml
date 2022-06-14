@@ -5,7 +5,10 @@
     <groupId>com.itjoin</groupId>
     <artifactId>pro-netty</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>rpc</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>pro-netty</name>
     <url>http://maven.apache.org</url>
@@ -124,6 +127,15 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <profiles>
         <profile>

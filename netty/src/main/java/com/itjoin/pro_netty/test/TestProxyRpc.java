@@ -7,13 +7,14 @@ public class TestProxyRpc {
     public static void main(String[] args) throws InterruptedException {
         //注意，此处扫描包名，不能包含服务器的启动类所在的包
         //只能包含具体测试类，以及代理类所在的包
-        AnnotationConfigApplicationContext context = new
-                AnnotationConfigApplicationContext("com.itjoin.pro_netty.controller",
-                "com.itjoin.pro_netty.proxy");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                "com.itjoin.pro_netty.controller", "com.itjoin.pro_netty.proxy");
         LoginController loginController = context.
                 getBean(LoginController.class);
         Object result = loginController.getUserByName("张三");
         System.out.println(result);
+        Object testSecondSell = loginController.testSecondSell("1");
+        System.out.println(testSecondSell);
         Thread.sleep(100000000);
     }
 }

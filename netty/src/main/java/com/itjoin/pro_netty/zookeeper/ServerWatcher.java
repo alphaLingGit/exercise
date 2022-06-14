@@ -61,7 +61,7 @@ public class ServerWatcher implements CuratorWatcher {
                 }
                 //在SERVER_PATH目录下构建临时节点，如10.118.15.15#8080#1#0000000000
                 client.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).
-                        forPath(NettyServer.SERVER_PATH + "/" + netAddress.getHostAddress() + "#" + Constants.port + "#" + Constants.weight + "#");
+                        forPath(NettyServer.SERVER_PATH + "/" + netAddress.getHostAddress() + "#" + Constants.PORT + "#" + Constants.WEIGHT + "#");
             } catch (Exception e) {
                 e.printStackTrace();
             }

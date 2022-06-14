@@ -17,7 +17,7 @@ public class ZookeeperFactory {
                 //此处连接Zookeeper地址，生产环境上需要写到配置文件中
 //			client = CuratorFrameworkFactory.newClient("localhost:2181",
 //					5000,5000, retryPolicy);
-                client = CuratorFrameworkFactory.newClient(Constants.zookeeperURL,
+                client = CuratorFrameworkFactory.newClient(Constants.ZOOKEEPER_URL,
                         5000, 5000, retryPolicy);
                 client.start();
             }

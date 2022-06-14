@@ -85,8 +85,7 @@ public class NettyServer {
                         }
                     });
             //端口需要放入配置文件中
-            int port = 8080;
-            port = Constants.port;
+            int port = Constants.PORT;
             // 同步绑定端口
             ChannelFuture future = serverBootstrap.bind(port).sync();
             //连接Zookeeper
@@ -97,14 +96,14 @@ public class NettyServer {
             //先判断SERVER_PATH路径是否存在，假如不存在需要创建
             Stat stat = client.checkExists().forPath(SERVER_PATH);
             if (stat == null) {
-                client.create().creatingParentsIfNeeded()
-                        .withMode(CreateMode.PERSISTENT).forPath(SERVER_PATH, "0".getBytes());
+                client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT)
+                        .forPath(SERVER_PATH, "0".getBytes());
             }
             //在SERVER_PATH目录下构建临时节点，如10.118.15.15#8080#1#0000000000
-            client.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).
-                    forPath(SERVER_PATH + "/" + netAddress.getHostAddress() + "#" + port + "#" + Constants.weight + "#");
+            client.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
+                    .forPath(SERVER_PATH + "/" + netAddress.getHostAddress() + "#" + port + "#" + Constants.WEIGHT + "#");
             //服务端需要需要加上zk的监控，以防Session断了，导致临时节点丢失
-            ServerWatcher.serverKey = netAddress.getHostAddress() + port + Constants.weight;
+            ServerWatcher.serverKey = netAddress.getHostAddress() + port + Constants.WEIGHT;
             client.getChildren().usingWatcher(ServerWatcher.getInstance()).forPath(SERVER_PATH);
             // 阻塞主线程，直到socket通道被关闭
             future.channel().closeFuture().sync();

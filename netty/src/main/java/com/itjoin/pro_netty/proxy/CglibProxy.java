@@ -26,8 +26,7 @@ public class CglibProxy implements BeanPostProcessor {
      * ，做重新赋值
      */
     @Override
-    public Object postProcessBeforeInitialization(Object bean,
-                                                  String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
         Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
@@ -94,8 +93,7 @@ public class CglibProxy implements BeanPostProcessor {
      * @param methodClassMap
      * @param field
      */
-    private void putMethodClass(Map<Method, Class>
-                                        methodClassMap, Field field) {
+    private void putMethodClass(Map<Method, Class> methodClassMap, Field field) {
         Method[] methods = field.getType().getDeclaredMethods();
         for (Method m : methods) {
             methodClassMap.put(m, field.getType());
@@ -104,8 +102,7 @@ public class CglibProxy implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessAfterInitialization(Object bean,
-                                                 String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
 

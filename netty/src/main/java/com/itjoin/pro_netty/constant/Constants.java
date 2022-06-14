@@ -4,13 +4,13 @@ import com.itjoin.pro_netty.util.PropertyUtil;
 
 public class Constants {
     public static final String SERVER_PATH = "/netty";
-    public static int port = 8991;
-    public static String zookeeperURL = "localhost:2181";
-    public static int weight = 1;
+    public static int PORT;
+    public static String ZOOKEEPER_URL;
+    public static int WEIGHT;
 
     static {
-        port = PropertyUtil.getInt("server.port");
-        zookeeperURL = PropertyUtil.getString("zookeeper.url");
-        weight = PropertyUtil.getInt("server.weight");
+        PORT = PropertyUtil.getInt("server.port");
+        ZOOKEEPER_URL = PropertyUtil.getString("zookeeper.url");
+        WEIGHT = PropertyUtil.getInt("server.weight");
     }
 }
